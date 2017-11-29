@@ -4,10 +4,12 @@ import (
 	"database/sql"
 	"fmt"
 	"io"
+
+	_ "github.com/go-sql-driver/mysql"
 )
 
-var DBType = ""
-var ConnString = ""
+var DBType string
+var ConnString string
 
 func ConnectToDB() (*sql.DB, error) {
 	return connectToDB()
