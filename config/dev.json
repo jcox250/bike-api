@@ -1,0 +1,22 @@
+{
+    "database": {
+        "type": "mysql",
+        "connectionString": "root:root@(localhost:3306)/bikerack_db"
+    },
+
+    "apiKey": "secretkey",
+
+    "cors": {
+        "allowedOrigins": [
+            "*"
+        ],
+        "allowedHeaders": [
+            "*"
+        ],
+        "allowedMethods": [
+            "GET",
+            "OPTIONS"
+        ]
+    }
+
+}
