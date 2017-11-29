@@ -1,10 +1,16 @@
 package main
 
-import "bike-api/config"
-
-var Config config.Config
+import (
+	"bike-api/config"
+	"bike-api/model"
+)
 
 func main() {
-	Config = config.Init()
+	setPackageConfiguration(config.Init())
 
+}
+
+func setPackageConfiguration(c config.Config) {
+	model.DBType = c.Database.Type
+	model.ConnString = c.Database.ConnString
 }

@@ -28,7 +28,6 @@ type Cors struct {
 
 func Init() Config {
 	var c Config
-
 	// Read config file
 	bytes, err := ioutil.ReadFile(configFile)
 	if err != nil {
@@ -41,6 +40,5 @@ func Init() Config {
 	if err != nil {
 		log.Fatal("Could not decode system configuration from config file: ", err)
 	}
-
 	return c
 }
