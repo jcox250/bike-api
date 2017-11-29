@@ -18,7 +18,7 @@ func GetAll() ([]Rack, error) {
 
 	rows, err := conn.Query("call spRackGetAll()")
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("error calling spRackGetAll(): %v", err)
 	}
 	defer model.SafeClose(rows, &err)
 
