@@ -26,7 +26,8 @@ func Authorize(h http.Handler) authorizationMiddleware {
 	return authorizationMiddleware{h}
 }
 
-func Logger(h http.Handler) http.Handler {
+// Logs all requests
+func Log(h http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		start := time.Now()
 		method := r.Method

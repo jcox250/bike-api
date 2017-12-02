@@ -11,7 +11,6 @@ func WriteResponse(w http.ResponseWriter, b []byte) {
 		InternalServerError(w, err)
 	}
 	log.Printf("http status: %v", http.StatusText(http.StatusOK))
-	w.WriteHeader(http.StatusOK)
 }
 
 func InternalServerError(w http.ResponseWriter, err error) {
