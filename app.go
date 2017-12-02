@@ -12,9 +12,10 @@ import (
 )
 
 func main() {
+	setConfigVariables(config.Init())
+
 	// Enable line numbers for logging
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	setPackageConfiguration(config.Init())
 
 	var rc rackcontroller.RackController
 
@@ -22,12 +23,17 @@ func main() {
 	http.Handle("/", r)
 	r.Handle("/racks", rc)
 
-	log.Fatal(http.ListenAndServe(":5000", httputil.Logger(r)))
+	c := httputil.NewCors()
+	handler := c.Handler(r)
 
+	log.Fatal(http.ListenAndServe(":5000", httputil.Log(handler)))
 }
 
-func setPackageConfiguration(c config.Config) {
+func setConfigVariables(c config.Config) {
 	model.DBType = c.Database.Type
 	model.ConnString = c.Database.ConnString
 	httputil.ApiKey = c.ApiKey
+	httputil.AllowedOrigins = c.Cors.AllowedOrigins
+	httputil.AllowedHeaders = c.Cors.AllowedHeaders
+	httputil.AllowedMethods = c.Cors.AllowedMethods
 }
