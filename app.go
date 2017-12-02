@@ -4,6 +4,7 @@ import (
 	"bike-api/config"
 	"bike-api/controller/rackcontroller"
 	"bike-api/model"
+	"bike-api/util/httputil"
 	"log"
 	"net/http"
 
@@ -21,11 +22,12 @@ func main() {
 	http.Handle("/", r)
 	r.Handle("/racks", rc)
 
-	http.ListenAndServe(":5000", nil)
+	log.Fatal(http.ListenAndServe(":5000", httputil.Logger(r)))
 
 }
 
 func setPackageConfiguration(c config.Config) {
 	model.DBType = c.Database.Type
 	model.ConnString = c.Database.ConnString
+	httputil.ApiKey = c.ApiKey
 }
